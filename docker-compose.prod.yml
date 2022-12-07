@@ -2,12 +2,11 @@ version: '3.8'
 
 services:
   web:
-    build: .
-    command: uvicorn app.main:app --host 0.0.0.0
-    volumes:
-      - .:/app
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     ports:
-      - 8008:8000
+      - 8009:80
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/v-machine-db
     depends_on:
@@ -22,6 +21,7 @@ services:
       - '5432:5432'
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_prod:/var/lib/postgresql/data/
+
 volumes:
-  postgres_data:
+  postgres_data_prod:
