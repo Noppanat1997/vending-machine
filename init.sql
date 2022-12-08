@@ -12,36 +12,53 @@ VALUES
 		('Customer', 'CUSTOMER');
 		
 CREATE TABLE wallets(
-    walletId SERIAL PRIMARY KEY,
-    userId INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    _1 INT,
-    _5 INT,
-    _10 INT,
-    _20 INT,
-    _50 INT,
-    _100 INT,
-    _500 INT,
-    _1000 INT
+    wallet_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    c1 INT,
+    c5 INT,
+    c10 INT,
+    c20 INT,
+    c50 INT,
+    c100 INT,
+    c500 INT,
+    c1000 INT
 );
 
 INSERT INTO
-    wallets (userId, _1, _5, _10, _20, _50, _100, _500, _1000)
+    wallets (user_id, c1, c5, c10, c20, c50, c100, c500, c1000)
 VALUES
     (1, 100, 100, 100, 100, 100, 100, 100, 100),
     (2, 10, 10, 10, 10, 10, 10, 10, 10);
     
 CREATE TABLE items(
-  itemId SERIAL PRIMARY KEY,
+  item_id SERIAL PRIMARY KEY,
   name VARCHAR(60),
-  amount INT,
   price INT
 );
+
+INSERT INTO
+    items (name, price)
+VALUES
+    ('Coca Cola', 22),
+    ('Pepsi', 22),
+    ('Water', 8),
+    ('Red Bull', 30),
+    ('Fanta', 18),
+    ('Sprite', 18);
+
 CREATE TABLE inventories(
-    inventoryId SERIAL PRIMARY KEY,
-    userId INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+    user_id INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    item_id INT NOT NULL REFERENCES items(item_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    amount INT
 );
 
-CREATE TABLE item_inventories(
-    inventoryId INT NOT NULL REFERENCES inventories(inventoryId) ON UPDATE CASCADE ON DELETE CASCADE,
-    itemId INT NOT NULL REFERENCES items(itemId) ON UPDATE CASCADE ON DELETE CASCADE
-);
+INSERT INTO
+    inventories (user_id, item_id, amount)
+VALUES
+    (1, 1, 10),
+    (1, 2, 10),
+    (1, 3, 10),
+    (1, 4, 10),
+    (1, 5, 10),
+    (1, 6, 10),
+    (2, 1, 1);
