@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+.plus {
+  background-color: rgb(45, 45, 45);
+}
+
+.plus:hover {
+  width: 33px;
+  height: 33px;
+  background-color: rgb(13, 13, 13);
+}
+
+.minus {
+  background-color: gray;
+  margin-right: 4px;
+}
+
+.minus:hover {
+  width: 33px;
+  height: 33px;
+  background-color: rgb(103, 103, 103);
+}
